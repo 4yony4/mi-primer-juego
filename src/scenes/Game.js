@@ -6,6 +6,7 @@ export class Game extends Scene
     {
         super('Game');
     }
+    
 
     preload ()
     {
