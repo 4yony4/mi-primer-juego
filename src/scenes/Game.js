@@ -21,6 +21,17 @@ export class Game extends Scene
         this.load.image('star', 'star.png');
         this.load.image('bomb', 'bomb.png');
         this.load.spritesheet('dude', 'dude.png', { frameWidth: 32, frameHeight: 48 });
+
+        //this.load.image('tileset5', 'tilemaps/tiles/tileset5.png');
+        //this.load.tilemapTiledJSON('tilemap', 'tilemaps/tiles/tileset5.json');
+        //this.load.tilemapTiledJSON('tilemap', 'tilemaps/mapa1.json');
+
+        // Load the tileset image
+        this.load.image('tiles', 'tilesets/tileset5.png');
+
+        // Load the tilemap
+        this.load.tilemapTiledJSON('map', 'tilemaps/mapa1.json');
+
     }
 
     create ()
@@ -28,6 +39,8 @@ export class Game extends Scene
         this.gameOver=false;
 
         this.add.image(400, 300, 'sky');
+
+        this.cargarTiledMap();
 
         this.platforms=this.physics.add.staticGroup();
 
@@ -75,7 +88,43 @@ export class Game extends Scene
         
         this.scoreText = this.add.text(506, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
         this.score=0;
+
+        //this.add.image(0, 0, 'tiles');
+
         
+
+        // Create layers from the map
+        
+
+        // Optional: set collision on a layer
+        //wallLayer.setCollisionByProperty({ collides: true });
+
+        //this.add.image(0, 0, 'tileset5');
+
+        //const map = this.make.tilemap({ key: 'tilemap' });
+
+        // add the tileset image we are using
+        //const tileset = map.addTilesetImage('tileset5', 'tileset5');
+        
+        // create the layers we want in the right order
+        //map.createStaticLayer('Background', tileset);
+
+        // "Ground" layer will be on top of "Background" layer
+        //map.createStaticLayer('Ground', tileset);
+
+        
+    }
+
+    cargarTiledMap(){
+        // Create the tilemap
+        const map = this.make.tilemap({ key: 'map' });
+
+        // Add the tileset image used in Tiled (name must match the name in Tiled)
+        const tileset = map.addTilesetImage('tileset5', 'tiles');
+        const backgroundLayer = map.createLayer('Background', tileset, 0, 0);
+        const groundLayer = map.createLayer('Ground', tileset, 0, 0);
+        const treesLayer = map.createLayer('Trees', tileset, 0, 0);
+        const wallLayer = map.createLayer('Walls', tileset, 0, 0);
     }
 
     estrellas() {
