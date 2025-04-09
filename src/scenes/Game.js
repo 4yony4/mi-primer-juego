@@ -2,6 +2,7 @@ import { Scene } from 'phaser';
 
 export class Game extends Scene
 {
+
  
     constructor ()
     {
@@ -20,6 +21,7 @@ export class Game extends Scene
         this.load.image('ground', 'platform.png');
         this.load.image('star', 'star.png');
         this.load.image('bomb', 'bomb.png');
+        this.load.image('toad', 'toad.png');
         this.load.spritesheet('dude', 'dude.png', { frameWidth: 32, frameHeight: 48 });
 
         //this.load.image('tileset5', 'tilemaps/tiles/tileset5.png');
@@ -30,7 +32,7 @@ export class Game extends Scene
         this.load.image('tiles', 'tilesets/tileset5.png');
 
         // Load the tilemap
-        this.load.tilemapTiledJSON('map', 'tilemaps/mapa1.json');
+        this.load.tilemapTiledJSON('map', 'tilemaps/mapa2.json');
 
     }
 
@@ -38,17 +40,20 @@ export class Game extends Scene
     {
         this.gameOver=false;
 
-        this.add.image(400, 300, 'sky');
+        //this.add.image(400, 300, 'sky');
+        
 
         this.cargarTiledMap();
 
-        this.platforms=this.physics.add.staticGroup();
+        
+
+        /*this.platforms=this.physics.add.staticGroup();
 
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
         this.platforms.create(600, 400, 'ground');
         this.platforms.create(50, 250, 'ground');
-        this.platforms.create(750, 220, 'ground');
+        this.platforms.create(750, 220, 'ground');*/
 
 
         this.player = this.physics.add.sprite(100, 450, 'dude');
@@ -78,7 +83,7 @@ export class Game extends Scene
             repeat: -1
         });
 
-        this.physics.add.collider(this.player, this.platforms);
+        //this.physics.add.collider(this.player, this.platforms);
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -88,6 +93,9 @@ export class Game extends Scene
         
         this.scoreText = this.add.text(506, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
         this.score=0;
+
+        this.physics.add.collider(this.player, this.colliderObjects);
+        this.physics.add.overlap(this.player, this.toads, this.overlapToad, null, this);
 
         //this.add.image(0, 0, 'tiles');
 
@@ -115,16 +123,57 @@ export class Game extends Scene
         
     }
 
+    
+
     cargarTiledMap(){
         // Create the tilemap
-        const map = this.make.tilemap({ key: 'map' });
+        var map = this.make.tilemap({ key: 'map' });
 
         // Add the tileset image used in Tiled (name must match the name in Tiled)
-        const tileset = map.addTilesetImage('tileset5', 'tiles');
-        const backgroundLayer = map.createLayer('Background', tileset, 0, 0);
-        const groundLayer = map.createLayer('Ground', tileset, 0, 0);
-        const treesLayer = map.createLayer('Trees', tileset, 0, 0);
-        const wallLayer = map.createLayer('Walls', tileset, 0, 0);
+        var tileset = map.addTilesetImage('tileset5', 'tiles');
+        var capaSuelo = map.createLayer('Suelo', tileset, 0, 0);
+        var capaArboles = map.createLayer('Arboles', tileset, 0, 0);
+        var capaOtros = map.createLayer('Otros', tileset, 0, 0);
+        //var wallLayer = map.createLayer('Rocks', tileset, 0, 0);
+
+
+        
+        var objectsLayer = map.getObjectLayer('objetos');
+
+        this.colliderObjects = this.physics.add.staticGroup();
+
+        objectsLayer.objects.forEach(obj => {
+            
+            if(obj.properties!=undefined)console.log("Valor del atributo tipo="+obj.properties);
+            const collider = this.colliderObjects.create(obj.x, obj.y, null);
+            collider.setSize(obj.width, obj.height);
+            collider.setVisible(false); // if you don't want to see it
+            collider.body.setOffset(0, 0);
+        });
+
+        //AQUI EMPIEZA EL CODIGO DE CARGAR LOS TOADS
+
+        var toadsLayer = map.getObjectLayer('toads');
+
+        this.toads = this.physics.add.staticGroup();
+
+        toadsLayer.objects.forEach(obj => {
+            this.toads.create(obj.x, obj.y, 'toad').setScale(0.1).refreshBody();
+
+        });
+
+        
+        
+        // Add collision between player and those objects
+        //this.physics.add.collider(this.player, colliderObjects);
+    }
+
+    overlapToad(player, toad){
+        this.score=this.score+100;
+        this.scoreText.setText('Score: ' + this.score);
+        this.player.setScale(2);
+
+        toad.disableBody(true, true);
     }
 
     estrellas() {
@@ -140,7 +189,7 @@ export class Game extends Scene
         
         });
 
-        this.physics.add.collider(this.stars, this.platforms);
+        this.physics.add.collider(this.stars, this.colliderObjects);
         this.physics.add.overlap(this.player, this.stars, this.collectStar, null, this);
 
     }
@@ -148,7 +197,7 @@ export class Game extends Scene
     bombas(){
         this.bombs = this.physics.add.group();
 
-        this.physics.add.collider(this.bombs, this.platforms);
+        this.physics.add.collider(this.bombs, this.colliderObjects);
 
         this.physics.add.collider(this.player, this.bombs, this.hitBomb, null, this);
     }

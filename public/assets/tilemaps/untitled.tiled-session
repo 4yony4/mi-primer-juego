@@ -3,9 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "mapa1.tmx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "": {
             "scaleInDock": 1,
@@ -13,10 +14,10 @@
         },
         "mapa1.tmx": {
             "scale": 0.84,
-            "selectedLayer": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 507.1428571428571,
-                "y": 448.2142857142857
+                "x": 507.14285714285717,
+                "y": 585.1190476190476
             }
         },
         "mapa1.tmx#tiles1": {
@@ -46,6 +47,7 @@
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "mapa1.tmx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [

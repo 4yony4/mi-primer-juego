@@ -1,67 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="11">
  <editorsettings>
   <export target="mapa1.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="tileset5" tilewidth="32" tileheight="32" tilecount="176" columns="8">
   <image source="../tilesets/tileset5.png" width="256" height="704"/>
- </tileset>
- <tileset firstgid="177" name="tiles1" tilewidth="129" tileheight="129" tilecount="18" columns="0">
-  <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
-   <image source="../tilesets/1.png" width="128" height="128"/>
-  </tile>
-  <tile id="1">
-   <image source="../tilesets/2.png" width="128" height="128"/>
-  </tile>
-  <tile id="2">
-   <image source="../tilesets/3.png" width="128" height="128"/>
-  </tile>
-  <tile id="3">
-   <image source="../tilesets/4.png" width="129" height="129"/>
-  </tile>
-  <tile id="4">
-   <image source="../tilesets/5.png" width="128" height="128"/>
-  </tile>
-  <tile id="5">
-   <image source="../tilesets/6.png" width="128" height="128"/>
-  </tile>
-  <tile id="6">
-   <image source="../tilesets/7.png" width="128" height="128"/>
-  </tile>
-  <tile id="7">
-   <image source="../tilesets/8.png" width="128" height="128"/>
-  </tile>
-  <tile id="8">
-   <image source="../tilesets/9.png" width="128" height="128"/>
-  </tile>
-  <tile id="9">
-   <image source="../tilesets/10.png" width="128" height="128"/>
-  </tile>
-  <tile id="10">
-   <image source="../tilesets/11.png" width="128" height="128"/>
-  </tile>
-  <tile id="11">
-   <image source="../tilesets/12.png" width="128" height="128"/>
-  </tile>
-  <tile id="12">
-   <image source="../tilesets/13.png" width="128" height="93"/>
-  </tile>
-  <tile id="13">
-   <image source="../tilesets/14.png" width="128" height="93"/>
-  </tile>
-  <tile id="14">
-   <image source="../tilesets/15.png" width="128" height="93"/>
-  </tile>
-  <tile id="15">
-   <image source="../tilesets/16.png" width="128" height="128"/>
-  </tile>
-  <tile id="16">
-   <image source="../tilesets/17.png" width="128" height="99"/>
-  </tile>
-  <tile id="17">
-   <image source="../tilesets/18.png" width="128" height="128"/>
-  </tile>
  </tileset>
  <layer id="2" name="Background" width="30" height="30">
   <data encoding="csv">
@@ -233,4 +176,16 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="7" name="objetos">
+  <object id="1" x="565.476" y="398.81" width="78.5714" height="84.5238"/>
+  <object id="2" x="688.095" y="201.19" width="104.762" height="110.714"/>
+  <object id="3" x="504.762" y="117.857" width="95.2381" height="67.8571"/>
+  <object id="4" x="190.476" y="250" width="63.0952" height="72.619"/>
+  <object id="5" x="305.952" y="516.667" width="80.9524" height="29.7619"/>
+  <object id="6" x="510.714" y="636.905" width="69.0476" height="67.8571"/>
+  <object id="7" x="63.0952" y="576.19" width="65.4762" height="29.7619"/>
+  <object id="8" x="158.333" y="734.524" width="61.9048" height="64.2857"/>
+  <object id="9" x="629.762" y="857.143" width="79.7619" height="38.0952"/>
+  <object id="10" x="509.524" y="1057.14"/>
+ </objectgroup>
 </map>
